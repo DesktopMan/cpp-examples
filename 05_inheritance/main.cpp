@@ -33,8 +33,8 @@ public:
 	 * below. This is called late binding. If virtual is not used then the base
 	 * implementation is always called.
 
-	 * If the destructor is not virtual then base destructors will not becalled
-	 * when deleting child pointers, which easily leads to memory leaks.
+	 * If the base destructor is not virtual then child destructors will not be
+	 * called when deleting base pointers, instead the behavior is undefined.
 	 */
 	virtual ~Point2d()
 	{
@@ -102,7 +102,7 @@ public:
 	/* Pure virtual function with no implementation
 	 *
 	 * Having this prevents an object of type Vehicle from being created, and
-	 * the compiler will complain if any child class omits to implement it.
+	 * the compiler will complain if any child class omits implementing it.
 	 */
 	virtual void start() = 0;
 
