@@ -94,22 +94,6 @@ protected:
 	int z;
 };
 
-// Example of an abstract base class
-class Vehicle
-{
-public:
-
-	/* Pure virtual function with no implementation
-	 *
-	 * Having this prevents an object of type Vehicle from being created, and
-	 * the compiler will complain if any child class omits implementing it.
-	 */
-	virtual void start() = 0;
-
-	int speed;
-	int passengerCount;
-};
-
 int main()
 {
 	// Access point2d object through point2d pointer
