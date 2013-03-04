@@ -15,6 +15,9 @@ class Point
 	friend std::ostream& operator<<(std::ostream& stream, const Point& p);
 
 public:
+	Point() {}
+	Point(int x, int y) : x(x), y(y) {}
+
 	/* Addition operator
 	 *
 	 * Allows two points to be added together using +. This could also have
@@ -25,7 +28,7 @@ public:
 	{
 		Point tmp;
 		tmp.x = x + p.x;
-		tmp.x = y + p.y;
+		tmp.y = y + p.y;
 
 		return tmp;
 	}
@@ -54,7 +57,7 @@ int main()
 {
 	std::string data = "Hello, the answer is ";
 
-	std::ofstream output("test.txt", std::ifstream::out);
+	std::ofstream output("test.txt", std::ios::out);
 
 	/*
 	 * Write some data, notice the direct support for built in classes such as
@@ -70,7 +73,7 @@ int main()
 	std::stringstream ss;
 
 	// Open the file for reading
-	std::ifstream input("test.txt", std::ifstream::in);
+	std::ifstream input("test.txt", std::ios::in);
 
 	// Read the data back. This will be done on a per token basis separated by
 	// white space.
@@ -95,7 +98,7 @@ int main()
 
 	// Classes can be used directly with streams by implementing the proper
 	// operators. Useful for serialization. Also uses the addition operator.
-	Point p;
+	Point p(1, 2);
 	std::cout << (p + p) << std::endl;
 
 	system("pause");
