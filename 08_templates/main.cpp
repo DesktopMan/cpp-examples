@@ -105,7 +105,7 @@ int main()
 	 */
 	Storage<std::map<int, std::string> > s(countries);
 	// If you have C++11 support you can also do
-	// Storage<std::map<decltype(countries)> s(countries);
+	// Storage<decltype(countries)> s(countries);
 
 	// Print a string and a number with our generic print function
 	print(std::string("hello"));
