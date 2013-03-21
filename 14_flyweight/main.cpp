@@ -1,11 +1,9 @@
 /* Flyweight pattern
  *
- * Create temporary objects (with no name) so that they have a very limited
- * lifetime. Simplifies cleanup and does not polute the namespace with dead
- * variables.
- *
- * Used with std::for_each in this example to perform an operation on every
- * item in an iterator range.
+ * Reuse an object for multiple values / states instead of allocating new ones.
+ * Reduces allocations and deallocations which can result in speedups and
+ * reduced memory fragmentation. Also reduces the work for the garbage
+ * collector if there is one.
  */
 #include <iostream>
 #include <string>
@@ -16,26 +14,29 @@ class Character
 {
 	char ch;
 public:
-	Character(char c) : ch(c) { }
-	void output() const { std::cout << ch; }
+	void set(char ch) { this->ch = ch; }
+	char get() const { return ch; }
 };
 
-// Class whose objects can be called as functions
-struct OutputChar
+// Print a given character
+void printCharacter(const Character& ch)
 {
-	// Called when an object is used as a function with one parameter
-	void operator()(char ch) const
-	{
-		Character(ch).output();
-	}
-};
-
+	std::cout << ch.get();
+}
 
 // Use flyweight object on string
 void hello_world(const std::string& message)
 {
+	Character ch;
+
 	// Iterate the string, calling the function object once on each char
-	std::for_each(message.begin(), message.end(), OutputChar());
+	for (auto it = message.begin(); it != message.end(); it++)
+	{
+		// Reuse the Character by setting a new value on it
+		ch.set(*it);
+
+		printCharacter(ch);
+	}
 }
 
 int main()
